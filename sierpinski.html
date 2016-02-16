@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="simg.js"></script>
     <link rel="stylesheet" type="text/css" href="sierpinski.css">
   </head>
   <body>
@@ -11,11 +12,12 @@
       <input type='range' max='7' min='0' id="iterations" step='1' value='0'/>
       <div>No Iterations: <span class="iterations"></span></div>
       <div>Drag Slider to Change Number Iteratoins</div>
+      <button onClick='download()'>Download</button>
     </div>
     
     <div class='canvas'>
-    <svg class="board" width="1200" height="600"></svg>
-    <div>
+    <svg class="board" width="850" height="600" style='background-color: white;'></svg>
+    </div>
     
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src='sierpinski.js'></script>

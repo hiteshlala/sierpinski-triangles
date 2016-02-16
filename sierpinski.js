@@ -78,12 +78,18 @@ var randColor = function() {
 };
 
 // image variables 
-
 var ht = 128;
 var iter = 7;
 var radius = 1;
 var xsf = 3;
 var ysf = 4;
+
+// var ht = 64;
+// var iter = 6;
+// var radius = 2;
+// var xsf = 3.5;
+// var ysf = 4.5;
+// $('#iterations').attr('max', iter);
 
 // initial render function
 var render = function render(iter){
@@ -138,8 +144,18 @@ $('.iterations').text(0);
 // reRender due to user input
 $('#iterations').change(function() {
   var iterations = Number(this.value);
-  // console.log('iterations',iterations);
   reRender(iterations);
   $('.iterations').text(iterations);
-
 });
+
+
+// trying to include a image downloader
+// var apiKey = '0c88d9dc-9c72-459d-9438-ce50893ecf4a';
+var download = function() {
+  var svgElement = document.getElementsByClassName('board');
+  var simg = new Simg(svgElement[0]);
+  // simg.replace();
+  simg.download();
+
+
+};
