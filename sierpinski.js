@@ -33,13 +33,10 @@ function sierpinski(n, h) {
     // add top triangle
     for (var i = 0; i < h/2; i++) {
       image.push([]);
-      
       for (var j = 0; j < width / 4; j++) {
         image[i].push(b);
       }
-
       image[i] = image[i].concat(smallTriangle[i]);
-      
       for (var j = 0; j < width / 4; j++) {
         image[i].push(b);
       }
@@ -81,28 +78,15 @@ var randColor = function() {
 };
 
 // image variables 
+
 var ht = 128;
 var iter = 7;
 var radius = 1;
 var xsf = 3;
 var ysf = 4;
 
-// console.log(document.getElementById('iterations').value);
-// var data = sierpinski(iter, ht);
-// var joinedData = [];
-// data.forEach(function(ary, i) {
-//   ary.forEach(function(vis, j) {
-//     joinedData.push({visi: vis, row: i, col: j, color: randColor()});
-//   });
-// });
-
-// var x = d3.scale.linear()
-//     .domain([0, d3.max(data)])
-//     .range([0, 420]);
-
-
+// initial render function
 var render = function render(iter){
-
   var data = sierpinski(iter, ht);
   var joinedData = [];
   data.forEach(function(ary, i) {
@@ -127,10 +111,35 @@ var render = function render(iter){
       .attr('fill', function(d){ return d.color; });
 };
 
+// secondary renders
+var reRender = function render(iter){
+  var data = sierpinski(iter, ht);
+  var joinedData = [];
+  data.forEach(function(ary, i) {
+    ary.forEach(function(vis, j) {
+      joinedData.push({visi: vis, row: i, col: j, color: randColor()});
+    });
+  });
+
+  d3.select(".board")
+    .selectAll("circle")
+      .data(joinedData)
+      .attr("cy", function(d) {return d.row * ysf + 20; })
+      .attr("cx", function(d) { return d.col * xsf + 20; })
+      .attr("r", radius)
+      .attr('visibility', function(d) { return d.visi; })
+      .attr('fill', function(d){ return d.color; });
+};
+
+// initial render
 render(0);
-var iterations = 0;
-$('#change').click(function() {
-  iterations++;
-  render(iterations % 7);
-  console.log("i get here");
-})
+$('.iterations').text(0);
+
+// reRender due to user input
+$('#iterations').change(function() {
+  var iterations = Number(this.value);
+  // console.log('iterations',iterations);
+  reRender(iterations);
+  $('.iterations').text(iterations);
+
+});

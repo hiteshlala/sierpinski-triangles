@@ -1,0 +1,13 @@
+.selections {
+  text-align: center
+
+}
+
+.canvas {
+  text-align: center;
+}
+.heading {
+  float: left;
+  font-size: 3em;
+  color: green;
+}
